@@ -4,10 +4,11 @@ import "../CSS_Files/app.css";
 class Clock extends Component {
   constructor(props) {
     super(props);
+    const CURRENT_DATE_TIME = new Date();
     this.state = {
-      day: 0,
-      hours: 0,
-      mins: 0,
+      day: CURRENT_DATE_TIME.getDay(),
+      hours: CURRENT_DATE_TIME.getHours(),
+      mins: CURRENT_DATE_TIME.getMinutes(),
       blinker_visible: true,
     };
   }
@@ -87,8 +88,8 @@ class Clock extends Component {
           </span>
         </div>
         {/* #TODO: Extract Date Component */}
-        <p className="date text-uppercase test-class">
-          {this.handleDay(this.state.day)}
+        <p className="date test-class">
+          <em>{this.handleDay(this.state.day)}</em>
         </p>
       </div>
     );
