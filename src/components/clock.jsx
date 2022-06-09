@@ -48,6 +48,8 @@ class Clock extends Component {
   handleHours(hours) {
     return hours === 12
       ? hours
+      : hours === 0
+      ? 12
       : hours < 10
       ? "0" + hours
       : hours < 22

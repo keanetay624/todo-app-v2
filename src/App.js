@@ -96,15 +96,17 @@ class App extends Component {
       <div className="App">
         <Navbar
           numTasks={outstandingTodos}
-          addTodoHandler={() => this.handleAdd(this.state.todos.length)}
           clearCompletedTodosHandler={this.handleClearCompleted}
           clearAllTodosHandler={this.handleClearAll}
           newTodoId={this.state.todos.length}
         />
         <Quote quote={this.state.quote} />
         <Clock />
-        <NewTodo userInputChangeHandler={this.handleChange} />
         <Todos todos={this.state.todos} onChecked={this.handleToggleChecked} />
+        <NewTodo
+          userInputChangeHandler={this.handleChange}
+          addTodoHandler={() => this.handleAdd(this.state.todos.length)}
+        />
       </div>
     );
   }

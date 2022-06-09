@@ -1,5 +1,5 @@
 import React from "react";
-import BtnAddTodo from "./btnAddTodo";
+
 import BtnClearCompletedTodos from "./btnClearCompletedTodos";
 import BtnClearAllTodos from "./btnClearAllTodos";
 
@@ -15,9 +15,6 @@ function Navbar(props) {
       {/* <h3 className="d-flex justify-content-center">
         Outstanding Tasks: {props.numTasks}
       </h3> */}
-      <BtnAddTodo
-        addTodoHandler={() => props.addTodoHandler(props.newTodoId)}
-      />
       <BtnClearCompletedTodos
         clearCompletedTodosHandler={props.clearCompletedTodosHandler}
       />
