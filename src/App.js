@@ -3,6 +3,7 @@ import Navbar from "./components/navbar";
 import Clock from "./components/clock";
 import Todos from "./components/todos";
 import NewTodo from "./components/newTodoInput";
+import Quote from "./components/quote";
 import axios from "axios";
 
 import "./CSS_Files/app.css";
@@ -29,8 +30,6 @@ class App extends Component {
     }
     document.body.style.backgroundColor = "#a5c7f8";
 
-    // api call
-    console.log("calling api");
     const response = await axios.get(`https://quotes.rest/qod`);
     const data = response.data.contents.quotes[0];
     const newQuote = {
@@ -102,15 +101,7 @@ class App extends Component {
           clearAllTodosHandler={this.handleClearAll}
           newTodoId={this.state.todos.length}
         />
-        <div className="quote">
-          <em>
-            <q>{this.state.quote.content}</q>
-            <p className="author">
-              <strong>- {this.state.quote.author}</strong>
-            </p>
-          </em>
-        </div>
-
+        <Quote quote={this.state.quote} />
         <Clock />
         <NewTodo userInputChangeHandler={this.handleChange} />
         <Todos todos={this.state.todos} onChecked={this.handleToggleChecked} />
