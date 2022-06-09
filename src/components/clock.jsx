@@ -9,20 +9,11 @@ class Clock extends Component {
       day: CURRENT_DATE_TIME.getDay(),
       hours: CURRENT_DATE_TIME.getHours(),
       mins: CURRENT_DATE_TIME.getMinutes(),
-      blinker_visible: true,
     };
   }
 
   componentDidMount() {
     setInterval(() => this.updateClock(), 1000);
-    setInterval(() => this.updateBlinker(), 1000);
-  }
-
-  updateBlinker() {
-    const { blinker_visible } = this.state;
-    this.setState({
-      blinker_visible: !blinker_visible,
-    });
   }
 
   updateClock() {
@@ -59,7 +50,9 @@ class Clock extends Component {
       ? hours
       : hours < 10
       ? "0" + hours
-      : "0" + (hours -= 12);
+      : hours < 22
+      ? "0" + (hours -= 12)
+      : (hours -= 12);
   }
 
   handleMins(mins) {
@@ -77,7 +70,7 @@ class Clock extends Component {
             {this.handleHours(this.state.hours)}
           </span>
           <span className="test-class" id="blinker">
-            {this.state.blinker_visible ? ":" : " "}
+            :
           </span>
           <span className="test-class">
             {" "}

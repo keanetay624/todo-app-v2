@@ -9,9 +9,9 @@ function Navbar(props) {
       className="navbar mx-auto"
       style={{ borderBottom: "2px solid grey", maxWidth: "50%" }}
     >
-      <a className="navbar-brand" href="#">
+      <span className="navbar-brand" href="#">
         Todo-List App
-      </a>
+      </span>
       {/* <h3 className="d-flex justify-content-center">
         Outstanding Tasks: {props.numTasks}
       </h3> */}

@@ -3,6 +3,7 @@ import Navbar from "./components/navbar";
 import Clock from "./components/clock";
 import Todos from "./components/todos";
 import NewTodo from "./components/newTodoInput";
+import axios from "axios";
 
 import "./CSS_Files/app.css";
 
@@ -13,15 +14,33 @@ class App extends Component {
     this.state = {
       todos: [],
       input: "",
+      quote: {
+        id: "",
+        content: "",
+        author: "",
+      },
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const todos = JSON.parse(localStorage.getItem("todos"));
     if (todos) {
       this.setState({ todos });
     }
     document.body.style.backgroundColor = "#a5c7f8";
+
+    // api call
+    console.log("calling api");
+    const response = await axios.get(`https://quotes.rest/qod`);
+    const data = response.data.contents.quotes[0];
+    const newQuote = {
+      id: data.id,
+      content: data.quote,
+      author: data.author,
+    };
+    this.setState({
+      quote: newQuote,
+    });
   }
 
   handleChange = (e) => {
@@ -60,8 +79,6 @@ class App extends Component {
       todos,
     });
     localStorage.setItem("todos", JSON.stringify(todos));
-
-    document.removeEventListener("onClick", this.handleClearAll);
   };
 
   handleClearCompleted = () => {
@@ -76,7 +93,6 @@ class App extends Component {
     const outstandingTodos = this.state.todos.filter(
       (todo) => todo.isComplete === false
     ).length;
-    const CURRENT_DATE_TIME = new Date();
     return (
       <div className="App">
         <Navbar
@@ -86,20 +102,17 @@ class App extends Component {
           clearAllTodosHandler={this.handleClearAll}
           newTodoId={this.state.todos.length}
         />
+        <div className="quote">
+          <em>
+            <q>{this.state.quote.content}</q>
+            <p className="author">
+              <strong>- {this.state.quote.author}</strong>
+            </p>
+          </em>
+        </div>
 
         <Clock />
         <NewTodo userInputChangeHandler={this.handleChange} />
-        <div className="d-flex m-2 p-2 justify-content-center">
-          {/* <BtnAddTodo
-            addTodoHandler={() => this.handleAdd(this.state.todos.length)}
-          />
-          <BtnClearCompletedTodos
-            clearCompletedTodosHandler={this.handleClearCompleted}
-          />
-          <BtnClearAllTodos clearAllTodosHandler={this.handleClearAll} /> */}
-        </div>
-
-        <br />
         <Todos todos={this.state.todos} onChecked={this.handleToggleChecked} />
       </div>
     );

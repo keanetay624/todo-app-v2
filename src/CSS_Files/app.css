@@ -1,3 +1,10 @@
+@media (max-width: 350px) {
+    * {
+        background-color: black;
+    }
+    
+}
+
 #clock-container {
     background-color: rgb(186, 212, 249);
     font-size: 2rem;
@@ -5,7 +12,20 @@
     margin: 0 auto;
     margin-top: 20px;
     border-radius: 6px;
-    /* font-family: Arial, Helvetica, sans-serif;  */
+}
+
+.quote {
+    margin: 20px auto;
+    padding: 20px;
+    width: 50%;
+    border-radius: 6px;
+    background-color: rgb(74, 147, 249);
+}
+
+.author {
+    border-radius: 6px;
+    padding: 40px, 0;
+    text-align: right;
 }
 
 .test-class {
